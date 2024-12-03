@@ -4,7 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class GridSpace : MonoBehaviour
+public interface IGridSpace
+{
+    void SetGameControllerReference(GameController controller);
+    void SetSpace();
+}
+
+public class GridSpace : MonoBehaviour, IGridSpace
 {
     public Button button;
     public TMP_Text buttonText;

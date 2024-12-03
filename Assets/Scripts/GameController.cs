@@ -19,7 +19,15 @@ public class PlayerColor
     public Color textColor;
 }
 
-public class GameController : MonoBehaviour
+public interface IGameController
+{
+    void EndTurn();
+    string GetPlayerSide();
+    void RestartGame();
+    void SetStartingSide(string startingSide);
+}
+
+public class GameController : MonoBehaviour, IGameController
 {
     public List<TMP_Text> buttonList;
     public GameObject gameOverPanel;
@@ -140,15 +148,14 @@ public class GameController : MonoBehaviour
     void GameOver(string winningPlayer)
     {
         SetBoardInteractable(false);
-
         if (winningPlayer == "draw")
         {
-            SetGameOverText("It's a draw!");
+            SetGameOverText("It's a Draw!");
             SetPlayerColorsInactive();
         }
         else
         {
-            SetGameOverText(playerSide + " Wins!");
+            SetGameOverText(winningPlayer + " Wins!");
         }
 
         restartButton.SetActive(true);
